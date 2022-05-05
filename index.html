@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parola</title>
+
+    <style type="text/css">
+        @font-face {
+        font-family: "Joost";
+        src: url('assets/LaNord-SemiLight.ttf');
+        }
+        body{
+            margin: 0;
+        }
+        
+        .titoloPagina{
+            position: absolute;
+            margin-top: 25%;
+            margin-left: 40%;
+            font-family: "Joost";
+            font-size: 22px;
+            color: white;
+        }
+
+        .button {
+            position:absolute;
+            margin-left: 95%;
+            margin-top: 50.2%;
+            font-family: "Joost";
+            font-size: 14px;
+            color: white;
+
+            background-color: transparent;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            overflow: hidden;
+            outline: none;
+
+        }
+
+        .slider {
+            position:absolute;
+            margin-left: 15.5%;
+            margin-top: 50.2%;
+            font-family: "Joost";
+            font-size: 14px;
+            color: white;
+
+        }
+        .mouse {
+            position:absolute;
+            margin-left: 1%;
+            margin-top: 50.2%;
+            font-family: "Joost";
+            font-size: 14px;
+            color: white;
+
+        }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="titoloPagina">
+        Parola protratta ritratta
+    </div>
+     <input class="button" type="button" onclick="location.href='https://ixd-supsi.github.io/specchiodellemiebrame/';" value="Index" />
+    <div class="slider">
+        prenditi il tuo spazio
+    </div>
+    <div class="mouse">
+        clicca il mouse <br> per un esperienza completa
+    </div>
+   
+  
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.4.1/lib/p5.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/IDMNYU/p5.js-speech@0.0.3/lib/p5.speech.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/addons/p5.sound.js"></script>
+    <script src="lib/p5.speech.js"></script>
+
+	<script>
+
+    let Font;
+    
+
+    let lang = navigator.language || 'it' || 'en-US';
+    var myRec = new p5.SpeechRec(lang,showResult); // new P5.SpeechRec object
+
+    let value = 0;
+
+    let sliderX;
+    let sliderY;
+    let sliderZ;
+
+    let d;
+
+    let mic;
+   
+    var myVoice = new p5.Speech(); // new P5.Speech object
+
+    let tempo;
+
+    let div;
+    let divSotto;
+    let divInfo;
+
+    var count = 0 ;
+
+    var countA = 0 ;
+    var countB = 0 ;
+    var countC = 0 ;
+    var countD = 0 ;
+    var countE = 0 ;
+    var countF = 0 ;
+    var countG = 0 ;
+    var countH = 0 ;
+    var countI = 0 ;
+    var countJ = 0 ;
+    var countK = 0 ;
+    var countL = 0 ;
+    var countM = 0 ;
+    var countN = 0 ;
+    var countO = 0 ;
+    var countP = 0 ;
+    var countQ = 0 ;
+    var countR = 0 ;
+    var countS = 0 ;
+    var countT = 0 ;
+    var countU = 0 ;
+    var countV = 0 ;
+    var countW = 0 ;
+    var countX = 0 ;
+    var countY = 0 ;
+    var countZ = 0 ;
+
+    let count_frame = 0;
+
+    function preload()
+    {
+    Font = loadFont('assets/LaNord-SemiLight.ttf');
+    }
+    
+
+	function setup()
+	{
+	    const cnv = createCanvas(displayWidth, displayHeight,WEBGL);
+        background(0);
+
+        // aggiunta questa linea di codice
+        cnv.mousePressed(userStartAudio);
+
+        let continuous = true; 
+        let interim = true;
+		myRec.onResult = showResult;
+		myRec.start(continuous,interim);
+
+        sliderX = createSlider(-500,1400,0,5);
+        sliderX.position(225, 750);
+        sliderX.style('height', '3px')
+        sliderX.style('width', '165px');
+        sliderX.style('background-color', '#FFFFFF');
+        sliderX.style('color', '#F6F34F');
+
+        amplitude = new p5.Amplitude();
+
+
+        mic = new p5.AudioIn()
+        mic.start()
+        //mic.AudioIn.start()
+        mic.getLevel()
+        //console.log(mic.getLevel())
+        //mic.AudioContext.start()
+
+        divSotto = createDiv("varca il confine del infinito")
+        divInfo = createDiv("clicca il mouse <br> per un esperienza completa")
+
+
+        tempo= millis();
+        // console.log(tempo)
+
+
+
+        
+	}
+
+
+  
+
+    function draw(){
+
+        let level = amplitude.getLevel();
+        let volume = mic.getLevel()
+
+        d = map(volume*8,0,1,20,120)
+
+        //console.log(volume, d,level)
+
+        // divSotto.position(225,725)
+        // divSotto.style('font-family', 'Helvetica')
+        // divSotto.style('color', '#FFFFFF')
+        // divSotto.style('font-size', '14px')
+
+    
+
+        // divInfo.position(20,725)
+        // divInfo.style('font-family', 'Helvetica')
+        // divInfo.style('color', '#FFFFFF')
+        // divInfo.style('font-size', '14px')
+
+        // console.log(tempo)
+    }
+   
+  
+
+	function showResult(){
+
+        
+        
+        if ( myRec.resultValue==true ) {
+
+            let valX = sliderX.value();
+
+
+            push()
+            textFont(Font)
+            textSize(d)
+            angleMode(DEGREES)
+            
+
+            rotateX(11) //oppure tempo
+            rotateY(53) 
+            rotateZ(20) 
+
+            fill(random(100,200),random(20,90), random(100,250))
+           
+            text(myRec.resultString,valX,-200,0);
+            pop()
+
+         
+		} 
+
+        if (myRec.resultString.includes("*")==true){
+            count++
+        }
+        //rettangolo *
+        fill(240,10,5,1.8)
+        noStroke()
+        rect((-width/2) + 335 +80 +30,306,20,-count)
+
+        if (myRec.resultString.includes("a")==true){
+            countA++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 365 +80 +30,306,20,-countA)
+
+        if (myRec.resultString.includes("b")==true){
+            countB++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 395 +80 +30,306,20,-countB)
+
+        if (myRec.resultString.includes("c")==true){
+            countC++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 425 +80 +30,306,20,-countC)
+
+        if (myRec.resultString.includes("d")==true){
+            countD++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 455 +80 +30,306,20,-countD)
+
+        if (myRec.resultString.includes("e")==true){
+            countE++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 485 +80 +30,306,20,-countE)
+
+        if (myRec.resultString.includes("f")==true){
+            countF++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 515 +80 +30,306,20,-countF)
+
+        if (myRec.resultString.includes("g")==true){
+            countG++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 545 +80 +30,306,20,-countG)
+
+        if (myRec.resultString.includes("h")==true){
+            countH++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 575 +80 +30,306,20,-countH)
+
+        if (myRec.resultString.includes("i")==true){
+            countI++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 605 +80 +30,306,20,-countI)
+
+        if (myRec.resultString.includes("j")==true){
+            countJ++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 635+80 +30,306,20,-countJ)
+
+        if (myRec.resultString.includes("k")==true){
+            countK++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 665 +80 +30 ,306,20,-countK)
+
+        if (myRec.resultString.includes("l")==true){
+            countL++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 695 +80 +30,306,20,-countL)
+
+        if (myRec.resultString.includes("m")==true){
+            countM++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 725 +80 +30,306,20,-countM)
+
+        if (myRec.resultString.includes("n")==true){
+            countN++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 755 +80 +30,306,20,-countN)
+
+        if (myRec.resultString.includes("o")==true){
+            countO++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 785 +80 +30,306,20,-countO)
+
+
+        if (myRec.resultString.includes("p")==true){
+            countP++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 815 +80 +30,306,20,-countP)
+
+        if (myRec.resultString.includes("q")==true){
+            countQ++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 845 +80 +30,306,20,-countQ)
+
+        if (myRec.resultString.includes("r")==true){
+            countR++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 875 +80 +30,306,20,-countC)
+
+        if (myRec.resultString.includes("s")==true){
+            countS++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 905 +80 +30,306,20,-countS)
+
+        if (myRec.resultString.includes("t")==true){
+            countT++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 935 +80 +30,306,20,-countT)
+
+        if (myRec.resultString.includes("u")==true){
+            countU++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 965 +80 +30,306,20,-countU)
+
+        if (myRec.resultString.includes("v")==true){
+            countV++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 995 +80 +30,306,20,-countV)
+
+        if (myRec.resultString.includes("w")==true){
+            countW++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 1025 +80 +30,306,20,-countW)
+
+        if (myRec.resultString.includes("x")==true){
+            countX++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 1055 +80 +30,306,20,-countX)
+
+        if (myRec.resultString.includes("y")==true){
+            countY++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 1085 +80 +30,306,20,-countY)
+
+        if (myRec.resultString.includes("z")==true){
+            countZ++
+        }
+        //rettangolo *
+        fill(254,254,254,1.8)
+        noStroke()
+        rect((-width/2) + 1115 +80 +30,306,20,-countZ)
+
+        
+
+
+
+	}
+
+</script>
+    
+</body>
+</html>
